@@ -1,9 +1,21 @@
+function checkGuess (text: string) {
+    match = 0
+    for (let index = 0; index <= foodList.length - 1; index++) {
+        if (true) {
+        	
+        } else {
+            music.wawawawaa.play()
+            strikes += 1
+        }
+    }
+}
 function createFood () {
     for (let index = 0; index <= 4; index++) {
         picnicFood.setImage(foodList[index])
         pause(500)
     }
 }
+let match = 0
 let foodList: Image[] = []
 let picnicFood: Sprite = null
 scene.setBackgroundImage(img`
@@ -289,12 +301,15 @@ img`
     `
 ]
 let picnicList = [
-"Cake",
-"Chicken",
-"Donut",
-"Ham",
-"Strawberry"
+"cake",
+"chicken",
+"donut",
+"ham",
+"strawberry"
 ]
 createFood()
 picnicFood.destroy()
 let guess = game.askForString("What was in Yogi's Basket?")
+info.setScore(0)
+let strikes = 0
+checkGuess("abc")
