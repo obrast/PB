@@ -296,3 +296,5 @@ let picnicList = [
 "Strawberry"
 ]
 createFood()
+picnicFood.destroy()
+let guess = game.askForString("What was in Yogi's Basket?")
