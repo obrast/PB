@@ -1,6 +1,6 @@
 function createFood () {
     for (let index = 0; index <= 4; index++) {
-        picnicFood.setImage(foodList.removeAt(index))
+        picnicFood.setImage(foodList[index])
         pause(500)
     }
 }
