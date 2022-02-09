@@ -1,9 +1,48 @@
+// This function checks the score to end the game if need be
+function checkScore () {
+    if (info.score() == 5) {
+        game.over(true)
+    }
+}
+// This function checks to see if the user input is correct
+function checkGuess (text: string) {
+    match = 0
+    for (let guess = 0; guess <= foodList.length - 1; guess++) {
+        if (picnicList[guess] == text) {
+            match = 1
+        }
+    }
+    if (match == 1) {
+        music.baDing.play()
+        info.changeScoreBy(1)
+        game.splash("Your current score is " + info.score())
+    } else {
+        music.wawawawaa.play()
+        strikes += 1
+        game.splash("Thats " + strikes + " misses")
+    }
+    checkMisses()
+    checkScore()
+}
+// This function displays the food on the screen 
 function createFood () {
     for (let index = 0; index <= 4; index++) {
         picnicFood.setImage(foodList[index])
         pause(500)
     }
 }
+// This function checks the misses that the user has and ends the game if need be
+function checkMisses () {
+    if (strikes == 3) {
+        game.over(false)
+    }
+}
+// This program is a game in which the user has to recall the food in a picnic basket and re-type ot showing their memory.
+// 
+// Owen B.
+let match = 0
+let strikes = 0
+let picnicList: string[] = []
 let foodList: Image[] = []
 let picnicFood: Sprite = null
 scene.setBackgroundImage(img`
@@ -288,13 +327,20 @@ img`
     . c c c c c c c . . . . . . . . 
     `
 ]
-let picnicList = [
-"Cake",
-"Chicken",
-"Donut",
-"Ham",
-"Strawberry"
+picnicList = [
+"cake",
+"chicken",
+"donut",
+"ham",
+"strawberry"
 ]
 createFood()
 picnicFood.destroy()
 let guess = game.askForString("What was in Yogi's Basket?")
+info.setScore(0)
+strikes = 0
+checkGuess(guess)
+while (info.score() < 5 || strikes < 3) {
+    guess = game.askForString("What was in Yogi's basket")
+    checkGuess(guess)
+}
